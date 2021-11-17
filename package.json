@@ -1,0 +1,28 @@
+{
+  "name": "dj-saber-discord-bot",
+  "version": "1.0.0",
+  "description": "My music bot for discord",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juan-hamon/DJ-Saber-Discord-Bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juan-hamon/DJ-Saber-Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/juan-hamon/DJ-Saber-Discord-Bot#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "@discordjs/voice": "^0.7.5",
+    "discord.js": "^13.3.1",
+    "distube": "^3.0.3",
+    "dotenv": "^10.0.0",
+    "ffmpeg-static": "^4.4.0",
+    "libsodium-wrappers": "^0.7.9"
+  }
+}

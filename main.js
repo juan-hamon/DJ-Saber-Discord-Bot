@@ -1,32 +1,17 @@
-const { Client, Intents } = require('discord.js');
-const Distube = require("distube");
+const { client } = require("./bot.js")
+const { token, prefix, distube } = require("./config.js")
+const fs = require('fs');
 
-require('dotenv').config()
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES],
-    restTimeOffset: 0,
-    presence: {
-        status: "dnd",
-        activities:[{
-            name: "DJ Saber",
-            type: "PLAYING"
-        }]
-    }
-});
+const commands = new Map();
 
-const distube = new Distube.DisTube(client,{
-    emitNewSongOnly: false,
-    leaveOnEmpty: true,
-    leaveOnFinish: true,
-    leaveOnStop: true,
-    youtubeDL: true,
-    updateYouTubeDL: true
-})
+for (const file of commandFiles){
+    const command = require(`./commands/${file}`);
+    commands.set(command.name, command.execute);
+}
 
-const prefix = ">";
-
-client.login(process.env.TOKEN);
+client.login(token);
 
 client.on("ready", ()=>{
     console.log(`${client.user.tag} Is online`)
@@ -40,33 +25,9 @@ client.on("messageCreate", (message) =>{
         return;
     }
     const args = message.content.slice(prefix.length).split(" ");
-    const command = args.shift()
-    if(command === "ping"){
-        return message.reply(`${client.ws.ping} ms`);
-    }
-    else if(command === "play"){
-        distube.play(message, args.join(" "));
-        return;
-    }
-    else if(command === "stop"){
-        distube.stop(message);
-        return message.reply("MUSIC STOPED")
-    }
-    else if(command === "skip"){
-        distube.skip(message);
-        return message.reply("MUSIC SKIPPED")
+    const command = args.shift();
+    const func = commands.get(command);
+    if(func != undefined){
+        func(message, args);
     }
 })
-
-distube.on("playSong", (queue, song) =>{
-    queue.textChannel.send(`Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`);
-})
-
-distube.on("addSong", (queue, song) =>{
-    queue.textChannel.send(`Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}.`);
-})
-
-distube.on("error", (channel, error) => {
-    console.log(error);
-    channel.send("An error encountered: " + error);
-});

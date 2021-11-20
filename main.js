@@ -1,5 +1,5 @@
 const { client } = require("./bot.js")
-const { token, prefix, distube } = require("./config.js")
+const { token, prefix } = require("./config.js")
 const fs = require('fs');
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -17,7 +17,7 @@ client.on("ready", ()=>{
     console.log(`${client.user.tag} Is online`)
 })
 
-client.on("messageCreate", (message) =>{
+client.on("messageCreate", async (message) =>{
     if(!message.guild){
         return;
     }
@@ -28,6 +28,6 @@ client.on("messageCreate", (message) =>{
     const command = args.shift();
     const func = commands.get(command);
     if(func != undefined){
-        func(message, args);
+        await func(message, args);
     }
 })

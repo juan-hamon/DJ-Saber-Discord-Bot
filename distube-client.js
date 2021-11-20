@@ -1,6 +1,7 @@
 const Distube = require("distube");
 const { client } = require("./bot.js");
-const { MessageEmbed } = require('discord.js');
+const { createPlayEmbed } = require("./embeds/play-embed.js")
+const { createAddEmbed } = require("./embeds/add-embed.js")
 
 const distube = new Distube.DisTube(client,{
     emitNewSongOnly: false,
@@ -11,30 +12,21 @@ const distube = new Distube.DisTube(client,{
     updateYouTubeDL: true
 })
 
-function createEmbed(title, description, totalSongs){
-    return new MessageEmbed()
-        .setColor("#e80761")
-        .setTitle(title)
-        .setAuthor("DJ Saber", client.user.avatarURL())
-        .setDescription(description)
-        .setThumbnail(client.user.avatarURL())
-        .setTimestamp()
-        .setFooter(`${totalSongs} songs in the queue`);
-}
-
 distube.on("playSong", (queue, song) =>{
-    embed = createEmbed(
+    embed = createPlayEmbed(
         `Playing ${song.name}`, 
         `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`,
+        song.thumbnail,
         queue.songs.length
     );
     queue.textChannel.send({ embeds: [embed] });
 })
 
 distube.on("addSong", (queue, song) =>{
-    embed = createEmbed(
+    embed = createAddEmbed(
         `Added ${song.name}`,
         `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}.`,
+        song.thumbnail,
         queue.songs.length
     );
     queue.textChannel.send({ embeds: [embed] });

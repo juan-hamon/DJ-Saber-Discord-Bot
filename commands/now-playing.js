@@ -5,6 +5,9 @@ const { createNowPlayingEmbed } = require("../embeds/now-playing-embed.js");
 
 module.exports = {
     name: "now-playing" ,
+    description: "Show's the song that it's currently playing.",
+    usage: ">now-playing",
+    example: ">now-playing",
     execute: async (message) =>{
         try{
             const { channel } = message.member.voice;

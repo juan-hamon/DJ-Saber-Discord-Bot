@@ -5,6 +5,9 @@ const { createNoSongsPlayingEmbed } = require("../embeds/errors/noSongsPlaying.j
 
 module.exports = {
     name: "stop" ,
+    description: "Stops the current queue.",
+    usage: ">stop",
+    example: ">stop",
     execute: async (message) =>{
         try{
             const { channel } = message.member.voice;

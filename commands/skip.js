@@ -5,6 +5,9 @@ const { createNoNextSongToSkipEmbed } = require("../embeds/errors/noNextSongToSk
 
 module.exports = {
     name: "skip" ,
+    description: "Skips the current song.",
+    usage: ">skip",
+    example: ">skip",
     execute: async (message) =>{
         try{
             const { channel } = message.member.voice;

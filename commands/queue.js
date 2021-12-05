@@ -4,6 +4,9 @@ const { createNoQueueEmbed } = require("../embeds/errors/noQueue.js");
 
 module.exports = {
     name: "queue" ,
+    description: "Show the songs in the queue (up to 25 songs are displayed) and other information.",
+    usage: ">queue",
+    example: ">queue",
     execute: async (message) =>{
         let queue = distube.getQueue(message);
         if(!queue){

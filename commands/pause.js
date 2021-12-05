@@ -6,6 +6,9 @@ const { createNoSongsPlayingEmbed } = require("../embeds/errors/noSongsPlaying.j
 
 module.exports = {
     name: "pause",
+    description: "Pauses the current song.",
+    usage: ">pause",
+    example: ">pause",
     execute: async (message) =>{
         try{
             const { channel } = message.member.voice;

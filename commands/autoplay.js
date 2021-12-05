@@ -5,6 +5,9 @@ const { createAutoplayEmbed } = require("../embeds/autoplay-embed.js");
 
 module.exports = {
     name: "autoplay" ,
+    description: "Turns on/off the autoplay function.",
+    usage: ">autoplay",
+    example: ">autoplay",
     execute: async (message) =>{
         try{
             const { channel } = message.member.voice;

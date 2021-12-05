@@ -8,6 +8,9 @@ const { createInvalidVolumeTypeEmbed } = require("../embeds/errors/invalidVolume
 
 module.exports = {
     name: "volume" ,
+    description: "Change the volume value (from 0 to 200%).",
+    usage: ">volume \`<volume_value>\`",
+    example: ">volume 50",
     execute: async (message, args) =>{
         try{
             const { channel } = message.member.voice;

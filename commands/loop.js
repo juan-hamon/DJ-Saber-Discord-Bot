@@ -7,6 +7,9 @@ const { createLoopEmbed } = require("../embeds/loop-embed.js");
 
 module.exports = {
     name: "loop" ,
+    description: "Activates the loop mode on for song or queue, or deactivates it.",
+    usage: ">loop \`<loop_type>\`",
+    example: ">loop song | >loop queue | >loop off",
     execute: async (message, args) =>{
         try{
             const { channel } = message.member.voice;

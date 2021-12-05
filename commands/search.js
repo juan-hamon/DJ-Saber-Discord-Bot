@@ -8,6 +8,9 @@ const { createSearchWithoutResultsEmbed } = require("../embeds/errors/searchWith
 
 module.exports = {
     name: "search" ,
+    description: "Search a song or playlist in order to add it to the queue. Use \`-p\` if you are searching a playlist, if not provided I will search a song.",
+    usage: ">search \`<song_or_playlist_name>\` \`[type_search]\`",
+    example: ">search In the end | >search Meteora Likin Park -p",
     execute: async (message, args) =>{
         let searchPlaylist = args.indexOf("-p") != -1 ? true : false;
         if(searchPlaylist){

@@ -1,5 +1,6 @@
 const { distube } = require("../distube-client.js");
-const { createNotInVoiceChannelEmbed } = require("../embeds/errors/notInVoiceChannelEmbed.js")
+const { createNotInVoiceChannelEmbed } = require("../embeds/errors/notInVoiceChannelEmbed.js");
+const { createNoArgsInCommandEmbed } = require("../embeds/errors/noArgsInCommand.js");
 
 module.exports = {
     name: "play" ,
@@ -11,8 +12,13 @@ module.exports = {
             const { channel } = message.member.voice;
             if(!channel){
                 notInVoiceChannelEmbed = createNotInVoiceChannelEmbed();
-                return message.channel.send({ embeds: [notInVoiceChannelEmbed] });
-            }else{
+                await message.channel.send({ embeds: [notInVoiceChannelEmbed] });
+            }
+            else if(!args[0]){
+                noArgsInCommand = createNoArgsInCommandEmbed("play");
+                await message.channel.send({ embeds: [noArgsInCommand] });
+            }
+            else{
                 await distube.play(message, args.join(" "));
             }
         }

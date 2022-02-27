@@ -6,7 +6,8 @@ Para poder ejecutar el código se necesitará lo siguiente:
 - NodeJS 16 o superior.
 - `Discord.js` 13.3.1 o superior.
 - `dotenv` 10.0.0 o superior.
-- `distube` 3.0.3 o superior.
+- `distube` 3.3.2 o superior.
+- `@distube/yt-dlp` 1.0.2 o superior,
 - `ffmpeg-static` 4.4.0 o superior.
 - `libsodium-wrappers` 0.7.9 o superior.
 - `@discordjs/opus` 0.5.3 o superior.

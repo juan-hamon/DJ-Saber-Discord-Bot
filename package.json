@@ -20,8 +20,9 @@
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
     "@discordjs/voice": "^0.7.5",
+    "@distube/yt-dlp": "^1.0.2",
     "discord.js": "^13.3.1",
-    "distube": "^3.0.3",
+    "distube": "^3.3.2",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9"

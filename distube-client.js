@@ -2,14 +2,14 @@ const Distube = require("distube");
 const { client } = require("./bot.js");
 const { createPlayEmbed } = require("./embeds/play-embed.js")
 const { createAddEmbed } = require("./embeds/add-embed.js")
+const { YtDlpPlugin } = require("@distube/yt-dlp")
 
 const distube = new Distube.DisTube(client,{
+    plugins: [new YtDlpPlugin()],
     emitNewSongOnly: false,
     leaveOnEmpty: true,
     leaveOnFinish: true,
     leaveOnStop: true,
-    youtubeDL: true,
-    updateYouTubeDL: true
 })
 
 distube.on("playSong", (queue, song) =>{

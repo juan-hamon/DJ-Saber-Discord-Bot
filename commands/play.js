@@ -19,7 +19,7 @@ module.exports = {
                 await message.channel.send({ embeds: [noArgsInCommand] });
             }
             else{
-                await distube.play(message.member.voice?.channel, args.join(" "));
+                await distube.play(message.member.voice?.channel, args.join(" "), {member: message.member, textChannel: message.channel});
             }
         }
         catch (e){

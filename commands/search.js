@@ -5,6 +5,7 @@ const { createSearchSelectionOutOfRangeEmbed } = require("../embeds/errors/searc
 const { createSearchSelectionInvalidTypeEmbed } = require("../embeds/errors/searchSelectionInvalidType.js");
 const { createSearchAnswerTimeOutEmbed } = require("../embeds/errors/searchAnswerTimeOut.js");
 const { createSearchWithoutResultsEmbed } = require("../embeds/errors/searchWithoutResults.js");
+const { createNotInVoiceChannelEmbed } = require("../embeds/errors/notInVoiceChannelEmbed.js");
 
 module.exports = {
     name: "search" ,
@@ -53,7 +54,17 @@ module.exports = {
                                     message.channel.send({ embeds: [invalidAnswerEmbed] });
                                 }
                                 else{
-                                    distube.play(message, result[userAnswer - 1].url);
+                                    distube.play(
+                                        message.member.voice?.channel, 
+                                        result[userAnswer - 1].url,
+                                        {member: message.member, textChannel: message.channel}
+                                    ).catch( (error) =>{
+                                        // It should be 'NOT_IN_VOICE', but it's detecting 'INVALID_TYPE'
+                                        if(error.errorCode === "INVALID_TYPE"){
+                                            notInVoiceChannelEmbed = createNotInVoiceChannelEmbed();
+                                            message.channel.send({ embeds: [notInVoiceChannelEmbed] });
+                                        }
+                                    });
                                 }
                             }).catch( () => {
                                 timeOutEmbed = createSearchAnswerTimeOutEmbed(responseTime);

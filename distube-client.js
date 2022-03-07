@@ -10,6 +10,7 @@ const distube = new Distube.DisTube(client,{
     leaveOnEmpty: true,
     leaveOnFinish: true,
     leaveOnStop: true,
+    youtubeDL: false,
 })
 
 distube.on("playSong", (queue, song) =>{
